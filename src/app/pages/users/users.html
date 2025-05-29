@@ -1,1 +1,56 @@
-<p>Pantalla de muestra temporal - Usuarios</p>
+<div class="users-card">
+  <h2>Gestión de Usuarios</h2>
+
+  <button class="toggle-form" (click)="toggleForm()">
+    {{ showForm ? 'Ocultar formulario' : (editingUser ? 'Editar usuario' : 'Nuevo usuario') }}
+  </button>
+
+
+  <form *ngIf="showForm" (ngSubmit)="saveUser()" class="user-form">
+    <div class="form-grid">
+      <div class="form-field">
+        <label for="email">Correo electrónico</label>
+        <input id="email" [(ngModel)]="newUser.email" name="email" required />
+      </div>
+
+      <div class="form-field">
+        <label for="password">Contraseña</label>
+        <input id="password" [(ngModel)]="newUser.password" name="password" required />
+      </div>
+
+      <div class="form-field">
+        <label for="role">Rol</label>
+        <select id="role" [(ngModel)]="newUser.role" name="role" required>
+          <option value="admin">admin</option>
+          <option value="normal">normal</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="action-button">{{ editingUser ? 'Actualizar' : 'Crear' }}</button>
+      <button type="button" class="cancel-button" (click)="cancelEdit()">Cancelar</button>
+    </div>
+  </form>
+
+
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Rol</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <button class="table-btn edit" (click)="edit(user)">Editar</button>
+          <button class="table-btn delete" (click)="delete(user)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
