@@ -1,0 +1,143 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #403b59;
+}
+
+.login-box {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 90%;
+  max-width: 360px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.logo {
+  width: 120px;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+  position: relative;
+
+  input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+  }
+}
+
+.password-group {
+  position: relative;
+
+  .eye-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+
+    svg {
+      transition: fill 0.3s ease;
+    }
+
+    &:hover svg {
+      fill: #f05323;
+    }
+  }
+}
+
+
+.forgot-password {
+  display: block;
+  text-align: right;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #e15b5b;
+  text-decoration: none;
+}
+
+.login-button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #f05323;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-button:hover {
+  background-color: #d9481d;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 1rem;
+  margin-bottom: 1.5rem;
+
+  label {
+    font-weight: 500;
+    color: #403b59;
+    margin-bottom: 0.2rem;
+    font-size: 0.95rem;
+  }
+
+  input {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    background-color: #f1f5ff;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: #f05323;
+    box-shadow: 0 0 0 2px rgba(240, 83, 35, 0.2);
+  }
+
+  .password-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    input {
+      flex: 1;
+      padding-right: 2.5rem;
+    }
+
+    .eye-button {
+      position: absolute;
+      right: 0.75rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+
+      svg {
+        width: 20px;
+        height: 20px;
+        fill: #888;
+      }
+
+      &:hover svg {
+        fill: #f05323;
+      }
+    }
+  }
+}
