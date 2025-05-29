@@ -17,12 +17,17 @@ export class AuthService {
     );
   }
 
-  saveToken(token: string) {
-    localStorage.setItem('token', token);
+  getToken(): string | null {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('token');
+    }
+    return null;
   }
 
-  getToken(): string | null {
-    return localStorage.getItem('token');
+  saveToken(token: string) {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('token', token);
+    }
   }
 
   getRoleFromToken(): string | null {

@@ -1,1 +1,8 @@
-<p>Pantalla de muestra temporal - NavBar</p>
+<nav class="navbar-clean">
+  <div class="navbar-brand">Sistema de Tareas</div>
+  <div class="navbar-links">
+    <a routerLink="/tasks" routerLinkActive="active">Tareas</a>
+    <a routerLink="/users" routerLinkActive="active">Usuarios</a>
+    <button (click)="logout()">Cerrar sesión</button>
+  </div>
+</nav>
