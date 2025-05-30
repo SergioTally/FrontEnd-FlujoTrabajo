@@ -44,6 +44,24 @@
     }
   }
 
+  .logout-wrapper {
+    margin-top: 28rem; // Espacio visual moderado
+  }
+
+  .logout-button {
+    background-color: #f05323;
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #d9481d;
+    }
+  }
+
   .sidebar-menu {
     display: flex;
     flex-direction: column;
