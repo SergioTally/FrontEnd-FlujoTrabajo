@@ -24,10 +24,17 @@
           <td>{{ task.status }}</td>
           <td>
             <button class="table-btn edit" (click)="edit(task)">Editar</button>
-            <button class="table-btn delete" (click)="delete(task)">Eliminar</button>
+            <button class="table-btn delete" (click)="askDelete(task)">Eliminar</button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+<app-confirm-dialog *ngIf="showConfirmDialog" [title]="'Confirmar eliminación'"
+  [message]="'¿Eliminar la tarea: ' + selectedTaskToDelete?.title + '?'" (confirm)="confirmDelete()"
+  (cancel)="cancelDialog()" />
+
+<app-message-dialog *ngIf="showMessage" [title]="messageTitle" [message]="messageBody" [buttonText]="'Entendido'"
+  (close)="showMessage = false" />

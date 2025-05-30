@@ -34,3 +34,6 @@
     </div>
   </form>
 </div>
+
+<app-message-dialog *ngIf="showMessage" [title]="messageTitle" [message]="messageBody" [buttonText]="'Entendido'"
+  (close)="handleCloseDialog()" />

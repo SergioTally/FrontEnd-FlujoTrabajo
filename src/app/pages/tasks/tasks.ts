@@ -3,16 +3,28 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { TaskService, Task } from '../../services/tasks.service';
+import { ConfirmDialog } from '../../components/confirm-dialog/confirm-dialog';
+import { MessageDialog } from '../../components/message-dialog/message-dialog';
 
 @Component({
   selector: 'app-tasks-list',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ConfirmDialog, MessageDialog],
   templateUrl: './tasks.html',
   styleUrls: ['./tasks.scss'],
 })
 export class Tasks {
   tasks: Task[] = [];
+  selectedTaskToDelete: Task | null = null;
+  showConfirmDialog = false;
+  showMessage = false;
+  messageTitle = '';
+  messageBody = '';
+  showInfo(title: string, message: string) {
+    this.messageTitle = title;
+    this.messageBody = message;
+    this.showMessage = true;
+  }
 
   constructor(
     private taskService: TaskService,
@@ -50,9 +62,29 @@ export class Tasks {
     this.router.navigate(['/tasks/edit', task._id]);
   }
 
-  delete(task: Task) {
-    if (confirm(`¿Eliminar tarea "${task.title}"?`)) {
-      this.taskService.delete(task._id).subscribe(() => this.loadTasks());
-    }
+  askDelete(task: Task) {
+    this.selectedTaskToDelete = task;
+    this.showConfirmDialog = true;
+  }
+
+  confirmDelete() {
+    if (!this.selectedTaskToDelete) return;
+
+    this.taskService.delete(this.selectedTaskToDelete._id).subscribe({
+      next: () => {
+        this.loadTasks();
+        this.showInfo('Éxito', 'La tarea fue eliminada correctamente');
+        this.cancelDialog();
+      },
+      error: () => {
+        this.showInfo('Error', 'Ocurrió un error al eliminar la tarea');
+        this.cancelDialog();
+      },
+    });
+  }
+
+  cancelDialog() {
+    this.selectedTaskToDelete = null;
+    this.showConfirmDialog = false;
   }
 }
