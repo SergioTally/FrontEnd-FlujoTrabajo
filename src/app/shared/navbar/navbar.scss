@@ -1,0 +1,105 @@
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #f8f7fa;
+  padding: 2rem 1rem;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', sans-serif;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10;
+
+  .sidebar-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3rem;
+
+    .profile-img img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-info {
+      text-align: center;
+      margin-top: 1rem;
+
+      .name {
+        font-weight: bold;
+        color: #403b59;
+        margin: 0;
+      }
+
+      .role {
+        font-size: 0.875rem;
+        color: #a3a0b1;
+        margin: 0;
+      }
+    }
+  }
+
+  .logout-wrapper {
+    margin-top: 28rem; // Espacio visual moderado
+  }
+
+  .logout-button {
+    background-color: #f05323;
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #d9481d;
+    }
+  }
+
+  .sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    a,
+    button {
+      background: none;
+      border: none;
+      font-size: 1rem;
+      font-weight: 500;
+      text-align: left;
+      text-decoration: none;
+      cursor: pointer;
+      color: #403b59;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      transition: background-color 0.3s ease;
+    }
+
+    a:hover,
+    button:hover {
+      background-color: #f9e6e0;
+      color: #f05323;
+    }
+
+    .active {
+      background-color: #f05323;
+      color: white;
+    }
+
+    button {
+      background-color: #f05323;
+      color: white;
+
+      &:hover {
+        background-color: #d9481d;
+      }
+    }
+  }
+}

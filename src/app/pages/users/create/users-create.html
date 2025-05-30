@@ -1,0 +1,38 @@
+<div class="form-wrapper">
+  <div class="form-header">
+    <div class="form-title">
+      <a (click)="cancelEdit()" class="back-button">← Regresar</a>
+      <h2>Usuarios</h2>
+      <p>Usuarios – {{ editingUserId ? 'Editar usuario' : 'Crear usuario' }}</p>
+    </div>
+
+    <div class="form-actions-top">
+      <button class="cancel" (click)="cancelEdit()">Cancelar</button>
+      <button class="submit" (click)="saveUser()">
+        {{ editingUserId ? 'Actualizar' : 'Crear' }}
+      </button>
+    </div>
+  </div>
+
+  <form (ngSubmit)="saveUser()" class="form-box" autocomplete="off">
+    <h3>Datos</h3>
+    <div class="form-row">
+      <input type="email" placeholder="Correo" [(ngModel)]="newUser.email" name="email" required autocomplete="off" />
+
+      <input *ngIf="!editingUserId" type="password" placeholder="Contraseña" [(ngModel)]="newUser.password"
+        name="password" required autocomplete="new-password" />
+
+      <select [(ngModel)]="newUser.role" name="role" required>
+        <option value="" disabled selected>Seleccionar</option>
+        <option value="admin">Administrador</option>
+        <option value="normal">Operativo</option>
+      </select>
+    </div>
+  </form>
+</div>
+
+<!-- Mensaje informativo -->
+<div class="message-overlay" *ngIf="showMessage">
+  <app-message-dialog [title]="messageTitle" [message]="messageBody" [buttonText]="'Entendido'"
+    (close)="handleCloseDialog()"></app-message-dialog>
+</div>

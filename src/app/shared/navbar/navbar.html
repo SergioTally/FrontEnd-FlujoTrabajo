@@ -1,0 +1,22 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="profile-img">
+      <img src="https://i.pravatar.cc/100" alt="Foto de perfil" />
+    </div>
+    <div class="profile-info">
+      <p class="name">Hola, {{ nombre }}</p>
+      <p class="role">{{ cargo }}</p>
+    </div>
+  </div>
+
+  <div class="sidebar-content">
+    <nav class="sidebar-menu">
+      <a routerLink="/users" routerLinkActive="active">Usuarios</a>
+      <a routerLink="/tasks" routerLinkActive="active">Tareas</a>
+    </nav>
+
+    <div class="logout-wrapper">
+      <button class="logout-button" (click)="logout()">Cerrar sesión</button>
+    </div>
+  </div>
+</div>

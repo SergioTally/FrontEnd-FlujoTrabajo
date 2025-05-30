@@ -1,0 +1,39 @@
+<div class="form-wrapper">
+  <div class="form-header">
+    <div class="form-title">
+      <h2>Tareas</h2>
+      <p>{{ taskId ? 'Editar tarea' : 'Crear nueva tarea' }}</p>
+    </div>
+
+    <div class="form-actions-top">
+      <button class="cancel" (click)="cancel()">Cancelar</button>
+      <button class="submit" (click)="saveTask()">
+        {{ taskId ? 'Actualizar' : 'Crear' }}
+      </button>
+    </div>
+  </div>
+
+  <form class="form-box" (ngSubmit)="saveTask()">
+    <h3>Datos</h3>
+    <div class="form-row">
+      <input type="text" name="title" placeholder="Título" [(ngModel)]="newTask.title" required />
+      <select name="status" [(ngModel)]="newTask.status" required>
+        <option value="" disabled>Seleccionar estado</option>
+        <option value="Pendiente">Pendiente</option>
+        <option value="En proceso">En proceso</option>
+        <option value="Terminada">Terminada</option>
+      </select>
+
+      <select *ngIf="isAdmin" name="assignedTo" [(ngModel)]="newTask.assignedTo">
+        <option value="" disabled selected>Asignar a...</option>
+        <option *ngFor="let user of users" [value]="user._id">{{ user.email }}</option>
+      </select>
+
+      <textarea name="description" rows="4" placeholder="Descripción" [(ngModel)]="newTask.description"
+        class="full-width"></textarea>
+    </div>
+  </form>
+</div>
+
+<app-message-dialog *ngIf="showMessage" [title]="messageTitle" [message]="messageBody" [buttonText]="'Entendido'"
+  (close)="handleCloseDialog()" />
