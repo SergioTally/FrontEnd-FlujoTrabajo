@@ -16,7 +16,7 @@ export const appRoutes: Routes = [
     children: [
       { path: '', component: Users },
       { path: 'create', component: UsersCreate },
-      { path: 'edit/:id', component: UsersCreate },
+      { path: 'edit/:id', component: UsersCreate, data: { renderMode: 'client' } },
     ],
   },
   {
@@ -25,7 +25,7 @@ export const appRoutes: Routes = [
     children: [
       { path: '', component: Tasks },
       { path: 'create', component: TasksCreate },
-      { path: 'edit/:id', component: TasksCreate },
+      { path: 'edit/:id', component: TasksCreate, data: { renderMode: 'client' } },
     ],
   },
   { path: '**', redirectTo: 'login' },
