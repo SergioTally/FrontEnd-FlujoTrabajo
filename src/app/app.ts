@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { RouterOutlet } from '@angular/router';
 import { Navbar } from './shared/navbar/navbar';
-import { NgIf } from '@angular/common';
+import { NgIf, NgClass  } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Navbar, NgIf],
+  imports: [RouterOutlet, Navbar, NgIf, NgClass ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

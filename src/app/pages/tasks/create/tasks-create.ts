@@ -71,15 +71,19 @@ export class TasksCreate {
       ? this.taskService.update(this.taskId, this.newTask)
       : this.taskService.create(this.newTask);
 
+    const mensaje = this.taskId
+      ? {
+          title: 'Actualizado',
+          body: 'La tarea fue actualizada correctamente.',
+        }
+      : { title: 'Creado', body: 'La tarea fue creada correctamente.' };
+
     op.subscribe({
       next: () => {
-        this.showInfo('Actualizado', 'La tarea fue actualizada correctamente.');
-        setTimeout(() => {
-          this.handleCloseDialog();
-        }, 12000); // Espera 1.2 segundos antes de cerrar
+        this.showInfo(mensaje.title, mensaje.body);
       },
       error: () => {
-        this.showInfo('Error', 'No se pudo guardar la tarea.');
+        this.showInfo(mensaje.title, mensaje.body);
       },
     });
   }

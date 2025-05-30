@@ -1,6 +1,6 @@
 <ng-container *ngIf="showNavbar">
   <app-navbar></app-navbar>
 </ng-container>
-<div class="main-content">
+<div [ngClass]="{ 'main-content': showNavbar }">
   <router-outlet></router-outlet>
 </div>
