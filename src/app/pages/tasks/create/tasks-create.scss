@@ -28,6 +28,16 @@
       display: flex;
       gap: 1rem;
 
+      .cancel {
+        background-color: #e0dff3;
+        color: #403b59;
+        border: none;
+        padding: 0.6rem 1.5rem;
+        border-radius: 2rem;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
       .submit {
         background-color: #f05323;
         color: white;
@@ -50,53 +60,38 @@
     border-radius: 1rem;
     box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.05);
 
-    .user-table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0 10px;
-      font-size: 0.95rem;
+    h3 {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #403b59;
+      margin-bottom: 1rem;
+    }
 
-      th {
-        text-align: left;
-        color: #a3a0b1;
-        padding: 0.75rem 1rem;
-      }
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
 
-      td {
-        background-color: white;
+      input,
+      select,
+      textarea {
+        font-size: 0.95rem;
         padding: 0.75rem 1rem;
-        border-radius: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 0.75rem;
+        background-color: #f9f9f9;
         color: #403b59;
-        vertical-align: middle;
+        resize: none;
+
+        &:focus {
+          outline: none;
+          border-color: #f05323;
+          box-shadow: 0 0 0 2px rgba(240, 83, 35, 0.2);
+        }
       }
 
-      tr {
-        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
-      }
-
-      .table-btn {
-        padding: 0.5rem 1.2rem;
-        border: none;
-        border-radius: 2rem;
-        font-weight: bold;
-        font-size: 0.9rem;
-        cursor: pointer;
-        transition: all 0.2s;
-
-        &.edit {
-          background-color: #f05323;
-          color: white;
-        }
-
-        &.delete {
-          background-color: #e15b5b;
-          color: white;
-          margin-left: 0.5rem;
-        }
-
-        &:hover {
-          opacity: 0.85;
-        }
+      .full-width {
+        grid-column: span 2;
       }
     }
   }

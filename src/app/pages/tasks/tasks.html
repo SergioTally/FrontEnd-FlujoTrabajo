@@ -1,1 +1,33 @@
-<p>Pantalla de muestra temporal - Tareas</p>
+<div class="form-wrapper">
+  <div class="form-header">
+    <div class="form-title">
+      <h2>Tareas</h2>
+      <p>Gestión de tareas asignadas</p>
+    </div>
+    <div class="form-actions-top">
+      <button class="submit" (click)="goToCreate()">Nueva tarea</button>
+    </div>
+  </div>
+
+  <div class="form-box">
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of tasks">
+          <td>{{ task.title }}</td>
+          <td>{{ task.status }}</td>
+          <td>
+            <button class="table-btn edit" (click)="edit(task)">Editar</button>
+            <button class="table-btn delete" (click)="delete(task)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

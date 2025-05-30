@@ -5,6 +5,7 @@ import { RoleGuard } from './guards/role-guard';
 import { Users } from './pages/users/users';
 import { Tasks } from './pages/tasks/tasks';
 import { UsersCreate } from './pages/users/create/users-create';
+import { TasksCreate } from './pages/tasks/create/tasks-create';
 
 export const appRoutes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -18,6 +19,14 @@ export const appRoutes: Routes = [
       { path: 'edit/:id', component: UsersCreate },
     ],
   },
-  { path: 'tasks', component: Tasks, canActivate: [AuthGuard] },
+  {
+    path: 'tasks',
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', component: Tasks },
+      { path: 'create', component: TasksCreate },
+      { path: 'edit/:id', component: TasksCreate },
+    ],
+  },
   { path: '**', redirectTo: 'login' },
 ];
