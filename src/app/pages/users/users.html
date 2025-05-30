@@ -24,11 +24,22 @@
           <td>{{ user.email }}</td>
           <td>{{ user.role === 'admin' ? 'Administrador' : 'Operativo' }}</td>
           <td>
-            <button class="table-btn edit" (click)="edit(user)">Editar</button>
-            <button class="table-btn delete" (click)="delete(user)">Eliminar</button>
+            <button class="table-btn edit" (click)="goToEdit(user)">Editar</button>
+            <button class="table-btn delete" (click)="askDelete(user)">Eliminar</button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+</div>
+
+<!-- Diálogo de confirmación -->
+<app-confirm-dialog *ngIf="showConfirmDialog" [title]="'Confirmar eliminación'"
+  [message]="'¿Seguro que deseas eliminar al usuario ' + selectedUserToDelete?.email + '?'" (confirm)="confirmDelete()"
+  (cancel)="cancelDialog()"></app-confirm-dialog>
+
+<!-- Mensaje informativo -->
+<div class="message-overlay" *ngIf="showMessage">
+  <app-message-dialog [title]="messageTitle" [message]="messageBody" [buttonText]="'Entendido'"
+    (close)="handleCloseDialog()"></app-message-dialog>
 </div>

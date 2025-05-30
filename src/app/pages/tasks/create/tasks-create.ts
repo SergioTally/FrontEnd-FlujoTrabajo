@@ -42,7 +42,7 @@ export class TasksCreate {
     private taskService: TaskService,
     private userService: UserService,
     private authService: AuthService,
-    private cdr: ChangeDetectorRef // ← esto debe estar aquí
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -61,7 +61,7 @@ export class TasksCreate {
           status: task.status,
           assignedTo: task.assignedTo,
         };
-        this.cdr.detectChanges(); // <-- fuerza a Angular a actualizar la vista
+        this.cdr.detectChanges();
       });
     }
   }

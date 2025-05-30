@@ -1,16 +1,25 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { NgIf, NgForOf } from '@angular/common';
 import { UserService, User } from '../../services/user.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { ConfirmDialog } from '../../components/confirm-dialog/confirm-dialog';
+import { MessageDialog } from '../../components/message-dialog/message-dialog';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, FormsModule, NgForOf],
+  imports: [
+    CommonModule,
+    FormsModule,
+    NgForOf,
+    RouterModule,
+    ConfirmDialog,
+    MessageDialog,
+  ],
   templateUrl: './users.html',
   styleUrls: ['./users.scss'],
 })
@@ -19,6 +28,11 @@ export class Users {
   newUser: Partial<User> = { email: '', password: '', role: 'normal' };
   editingUser: User | null = null;
   showForm = false;
+  selectedUserToDelete: User | null = null;
+  showConfirmDialog = false;
+  showMessage = false;
+  messageTitle = '';
+  messageBody = '';
 
   constructor(
     private userService: UserService,
@@ -35,20 +49,35 @@ export class Users {
       });
   }
 
+  cancelDialog() {
+    this.selectedUserToDelete = null;
+    this.showConfirmDialog = false;
+  }
+
+  showInfo(title: string, message: string) {
+    this.messageTitle = title;
+    this.messageBody = message;
+    this.showMessage = true;
+    this.cdr.detectChanges();
+  }
+
+  handleCloseDialog() {
+    this.showMessage = false;
+    this.cdr.detectChanges();
+  }
+
   ngOnInit() {
     this.loadUsers();
   }
 
   loadUsers() {
-    console.log('ngOnInit ejecutado');
     this.userService.getAll().subscribe({
       next: (data) => {
-        console.log('data', data);
         this.users = data;
         this.cdr.detectChanges();
       },
       error: (err) => {
-        console.error('Error al cargar usuarios:', err);
+        this.showInfo('Error', 'Error al cargar los usuarios.');
       },
     });
   }
@@ -99,5 +128,30 @@ export class Users {
 
   goToCreate() {
     this.router.navigate(['/users/create']);
+  }
+
+  goToEdit(user: User) {
+    this.router.navigate(['/users/edit', user._id]);
+  }
+
+  askDelete(user: User) {
+    this.selectedUserToDelete = user;
+    this.showConfirmDialog = true;
+  }
+
+  confirmDelete() {
+    if (!this.selectedUserToDelete) return;
+
+    this.userService.delete(this.selectedUserToDelete._id).subscribe({
+      next: () => {
+        this.loadUsers();
+        this.cancelDialog();
+        this.showInfo('Éxito', 'Usuario eliminado correctamente.');
+      },
+      error: () => {
+        this.cancelDialog();
+        this.showInfo('Error', 'No se pudo eliminar el usuario.');
+      },
+    });
   }
 }
